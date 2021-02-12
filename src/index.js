@@ -85,7 +85,7 @@ var corsOptions = {
     }
   }
 }
-//app.use(cors())
+app.use(cors())
 
 app.use(express.urlencoded({extended: true})); // aceptar el tipo de formato
 //app.use(express.urlencoded());
@@ -124,12 +124,15 @@ app.use('/api/libro',require('./routes/libro.route'));
 app.use('/api/prestamo',require('./routes/prestamo.route'));
 
 
-
-app.get('*' ,function (req, res, next) {
+/**
+ * 
+ * app.get('*' ,function (req, res, next) {
 
   res.sendFile(path.join(__dirname,'bin/index.html'))
 
 });
+ */
+
 
 // starting the server
 

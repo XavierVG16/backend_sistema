@@ -12,9 +12,10 @@ categoriaCtrl.getCategorias = async (req, res, next) => {
 };
 
 categoriaCtrl.createCategoria = async (req, res, next) => {
+  try {
   const {nombre} = req.body;
   const newCategoria = {nombre}
-  try {
+
     const categorias = await pool.query('select * from categoria where nombre = ?',nombre);
     if (categorias.length == 0) {
         const categoria  = await pool.query('insert into categoria set ?', newCategoria);
@@ -24,7 +25,7 @@ categoriaCtrl.createCategoria = async (req, res, next) => {
     }
      
   } catch (error) {
-    res.status(500).json({message:'No se pudo guardar la categoria'});
+    res.status(500).json({message:'No se pudo guardar la categoria'}, error);
   }
  
 };
